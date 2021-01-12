@@ -9,9 +9,12 @@
 # Implement a neural network
 
 import numpy as np
+import csv 
+
 from sklearn.linear_model import LinearRegression
 from matplotlib import pyplot as plot 
-
+from numpy import genfromtxt
+"""
 #makes x y a numpy array, for faster calculations
 #reshape to make x 2D 
 x = np.array([5, 15, 25, 35, 45, 55]).reshape(-1, 1)
@@ -33,6 +36,12 @@ print("Slope = ", model.coef_)
 y_pred = model.predict(x)
 print("Prediction: :", y_pred)
 
-#plot.plot(x,y)
-#plot.show()
+plot.plot(x,y)
+plot.show()"""
+
+
+with open("test.csv", 'r') as file:
+    read = csv.reader(file)
+    data = genfromtxt("test.csv", delimiter = ',')
+    print(data[1])
 
