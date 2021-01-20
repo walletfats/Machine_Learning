@@ -7,32 +7,31 @@
 # KNN algorithm
 # Applying all of these fundementals in code and understanding them well
 # Implement a neural network
-
+import pandas as pd 
 import numpy as np
-from sklearn.linear_model import LinearRegression
-from matplotlib import pyplot as plot 
+from sklearn import linear_model
+from sklearn.utils import shuffle 
 
-#makes x y a numpy array, for faster calculations
-#reshape to make x 2D 
-x = np.array([5, 15, 25, 35, 45, 55]).reshape(-1, 1)
-y = np.array([5, 20, 14, 32, 22, 38])
 
-print(x)
+data = pd.read_csv("student-mat.csv", sep = ";")
 
-#calcs the optimal weight values for x 
-model = LinearRegression().fit(x, y)
-        
-#score() just determines the coefficient of determination
-r_squared = model.score(x, y)
+data = data[["Grade1", "Grade2", "Grade3", "Study-time", "Failures", "Absences"]]
 
-print("R^2 = ", r_squared)
+predict = "Grade3"
 
-print("Intercept = ", model.intercept_)
-print("Slope = ", model.coef_)
+x = np.array(data.drop([predict], 1)
+y = np.array(data[predict])
 
-y_pred = model.predict(x)
-print("Prediction: :", y_pred)
+x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size = 0.1)
 
-#plot.plot(x,y)
-#plot.show()
+linear = linear_model.LinearRegression()
+
+linear.fit(x_train, y_train)
+linear.score(x_test, y_test)
+
+accuracy = linear.score(x_test, y_test)
+print(accuracy)
+
+print("Coefficient: ", linear.coef_)
+print("Intercept: ", linear.intercept_)
 
